@@ -8,11 +8,12 @@ import path from "path";
 import logger from "morgan";
 import http from "http";
 import { MongoDbDatasource } from "./datasource/MongoDbDatasource";
-import { ValidationUtility } from "./validation/ValidationUtility";
 import { Topic } from "./model/Topic";
 import { AppUser } from "./model/AppUser";
-import { AppRole } from "./model/AppRole";
+import { AppRole, appRoleProperties } from "./model/AppRole";
 import { Message } from "./model/Message";
+import { initRouter } from "./init/RouterInit";
+import { handleError } from "./error/handler/GlobalErrorHandler";
 
 const app = express();
 const router = express.Router();
@@ -51,7 +52,12 @@ const message = new Message();
 const dataSource = new MongoDbDatasource();
 dataSource.connect();
 
+initRouter(router);
+router.get("*", (req, res) => res.status(404).render("404"));
+
+app.use(router);
+
+app.use(handleError);
+
 const server = http.createServer(app);
 server.listen(process.env.SERVER_PORT ?? 3000, () => console.log("run!"));
-
-console.log(ValidationUtility.isPasswordStrong("a"));

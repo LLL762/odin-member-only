@@ -1,8 +1,9 @@
 import { model, Schema, Types } from "mongoose";
 import validator from "validator";
-import { ValidationUtility as v } from "../validation/ValidationUtility";
+import v from "../validation/ValidationUtility";
 import { IAppRole } from "./AppRole";
 import bcrypt from "bcryptjs";
+import { handleMongooseError } from "../error/handler/MongooseErrHandler";
 
 export interface IAppUser {
   _id: Types.ObjectId;
@@ -90,16 +91,19 @@ const appUserSchema = new Schema<IAppUser>(
 );
 
 appUserSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    return next();
+  if (this.isModified("password")) {
+    try {
+      this.password = await bcrypt.hash(this.password, 10);
+    } catch (err: any) {
+      console.log(err);
+      next(err);
+    }
   }
 
-  try {
-    this.password = await bcrypt.hash(this.password, 10);
-  } catch (err) {
-    console.log(err);
-  }
   next();
 });
+
+appUserSchema.post(["findOne", "find"], handleMongooseError);
+appUserSchema.post(["save", "updateOne"], handleMongooseError);
 
 export const AppUser = Object.seal(model<IAppUser>("AppUser", appUserSchema));

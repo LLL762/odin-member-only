@@ -1,6 +1,6 @@
 import { model, Schema, Types } from "mongoose";
 import { IMesssage } from "./Message";
-import { ValidationUtility as v } from "../validation/ValidationUtility";
+import v from "../validation/ValidationUtility";
 
 export interface ITopic {
   _id: Types.ObjectId;

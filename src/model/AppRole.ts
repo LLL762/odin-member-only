@@ -1,5 +1,5 @@
 import { model, Schema, Types } from "mongoose";
-import { ValidationUtility as v } from "../validation/ValidationUtility";
+import v from "../validation/ValidationUtility";
 
 export interface IAppRole {
   _id: Types.ObjectId;
