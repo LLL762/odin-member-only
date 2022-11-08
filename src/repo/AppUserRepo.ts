@@ -1,4 +1,3 @@
-import { IAppUserDto } from "../dto/AppUserDto";
 import { AppUser, IAppUser } from "../model/AppUser";
 import { Doc } from "../types-alias/MongooseTypes";
 

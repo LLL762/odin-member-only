@@ -13,6 +13,7 @@ export const initRouter = (router: Router) => {
   router.get(SignUpController.URI, SignUpController.getHandler);
   router.post(
     SignUpController.URI,
+    SignUpController.validateReqBody,
     AppUserValidator.validationRules(),
     SignUpController.validationErrorHandler,
     SignUpController.postHandler,

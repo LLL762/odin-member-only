@@ -3,14 +3,13 @@ import validator from "validator";
 import v from "../validation/ValidationUtility";
 import { IAppRole } from "./AppRole";
 import bcrypt from "bcryptjs";
-import { handleMongooseError } from "../error/handler/MongooseErrHandler";
 
 export interface IAppUser {
   _id: Types.ObjectId;
   username: string;
   password: string;
-  firstname: string | undefined;
-  lastname: string | undefined;
+  firstname?: string;
+  lastname?: string;
   email: string;
   roles: IAppRole[];
 }

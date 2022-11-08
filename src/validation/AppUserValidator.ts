@@ -68,4 +68,5 @@ const validateLastName = () =>
     .withMessage(
       `Lastname must be between ${appUserProperties.defaultMinLength} and  ${appUserProperties.defaultMaxLength}`
     );
+
 export default { validationRules };
