@@ -9,8 +9,8 @@ export interface IAppUser {
   _id: Types.ObjectId;
   username: string;
   password: string;
-  firstname: string;
-  lastname: string;
+  firstname: string | undefined;
+  lastname: string | undefined;
   email: string;
   roles: IAppRole[];
 }
@@ -43,7 +43,6 @@ const appUserSchema = new Schema<IAppUser>(
     password: {
       type: String,
       required: [true, v.createRequiredMsg("password")],
-      trim: true,
       maxlength: [
         appUserProperties.defaultMaxLength,
         v.createMaxLengthMsg("password", appUserProperties.defaultMaxLength),
@@ -102,8 +101,5 @@ appUserSchema.pre("save", async function (next) {
 
   next();
 });
-
-appUserSchema.post(["findOne", "find"], handleMongooseError);
-appUserSchema.post(["save", "updateOne"], handleMongooseError);
 
 export const AppUser = Object.seal(model<IAppUser>("AppUser", appUserSchema));

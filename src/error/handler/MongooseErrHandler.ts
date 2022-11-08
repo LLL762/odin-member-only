@@ -1,13 +1,13 @@
-import { NextFunction } from "express";
-import { DuplicateKeyError } from "../DuplicateKeyError";
+import { log } from "console";
 
-export async function handleMongooseError(error: any, next: NextFunction) {
-  console.log(error);
+export function handleMongooseError(error: any) {
+  let output: string[] = [];
+
   if (error.name === "MongoServerError" && error.code === 11000) {
-    next(
-      new DuplicateKeyError(`${error.keyValue.join(", ")} are already taken`)
-    );
-  } else {
-    next(error);
+    const keyName = Object.keys(error.keyValue)[0];
+
+    output.push(keyName + " " + error.keyValue[keyName] + " already taken");
   }
+
+  return output;
 }

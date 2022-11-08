@@ -15,6 +15,8 @@ export class MongoDbDatasource implements Datasource {
         pass: process.env.DATASOURCE_PASSWORD,
         dbName: process.env.DATASOURCE_DB_NAME,
       });
+
+      /*   mongoose.connection.on("error",); */
     } else {
       throw new Error("Datasource url not specified");
     }

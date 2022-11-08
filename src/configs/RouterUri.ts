@@ -5,4 +5,5 @@ export enum RouterUris {
   PATHVAR_ID = "/:id",
   LOG_IN = "/login",
   LOG_OUT = "/logout",
+  SIGN_UP = "/sign-up",
 }

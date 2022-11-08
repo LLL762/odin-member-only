@@ -14,6 +14,8 @@ import { AppRole, appRoleProperties } from "./model/AppRole";
 import { Message } from "./model/Message";
 import { initRouter } from "./init/RouterInit";
 import { handleError } from "./error/handler/GlobalErrorHandler";
+import { isValidObjectId } from "mongoose";
+import { handleMongooseError } from "./error/handler/MongooseErrHandler";
 
 const app = express();
 const router = express.Router();
