@@ -14,8 +14,8 @@ import { AppRole, appRoleProperties } from "./model/AppRole";
 import { Message } from "./model/Message";
 import { initRouter } from "./init/RouterInit";
 import { handleError } from "./error/handler/GlobalErrorHandler";
-import { isValidObjectId } from "mongoose";
-import { handleMongooseError } from "./error/handler/MongooseErrHandler";
+import PassportInit from "./init/PassportInit";
+import AuthFilter from "./auth/AuthFilter";
 
 const app = express();
 const router = express.Router();
@@ -54,7 +54,11 @@ const message = new Message();
 const dataSource = new MongoDbDatasource();
 dataSource.connect();
 
+app.all("*", AuthFilter.filter);
+
+PassportInit.init();
 initRouter(router);
+
 router.get("*", (req, res) => res.status(404).render("404"));
 
 app.use(router);

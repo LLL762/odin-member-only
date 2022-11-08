@@ -1,5 +1,3 @@
-import { log } from "console";
-
 export function handleMongooseError(error: any) {
   let output: string[] = [];
 
