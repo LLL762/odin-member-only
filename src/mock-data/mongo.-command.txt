@@ -1,0 +1,7 @@
+mongoimport 
+--authenticationDatabase admin 
+"mongodb://root:root@localhost:27017" 
+--db clubhouse -
+-collection topics 
+--file C:\node-js\odin-member-only\src\mock-data\topics.json 
+--jsonArray

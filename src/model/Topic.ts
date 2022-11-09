@@ -6,6 +6,7 @@ export interface ITopic {
   _id: Types.ObjectId;
   name: string;
   messages: IMesssage[];
+  isNsfw: boolean;
   lastPost: Date;
 }
 
@@ -33,9 +34,12 @@ const topicSchema = new Schema<ITopic>(
     messages: {
       type: [{ type: Types.ObjectId, ref: "Message" }],
     },
+    isNsfw: {
+      type: Boolean,
+      default: false,
+    },
     lastPost: {
       type: Date,
-      required: [true, v.createRequiredMsg("lastPost")],
     },
   },
   { collection: "topics", timestamps: true }

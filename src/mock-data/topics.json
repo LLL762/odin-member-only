@@ -1,0 +1,14 @@
+[
+    {
+        "name": "cats",
+        "isNsfw": false
+    },
+    {
+        "name": "dogs",
+        "isNsfw": false
+    },
+    {
+        "name": "birds",
+        "isNsfw": true
+    }
+]

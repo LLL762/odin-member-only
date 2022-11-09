@@ -4,6 +4,7 @@ import { RouterUris } from "../configs/RouterUri";
 import AppUserController from "../controller/AppUserController";
 import LogInController from "../controller/LogInController";
 import SignUpController from "../controller/SignUpController";
+import TopicsAllController from "../controller/TopicsAllController";
 import AppUserValidator from "../validation/AppUserValidator";
 
 export const initRouter = (router: Router) => {
@@ -31,4 +32,6 @@ export const initRouter = (router: Router) => {
       failureMessage: true,
     })
   );
+
+  router.get(TopicsAllController.URI, TopicsAllController.getHandler);
 };

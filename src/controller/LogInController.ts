@@ -18,11 +18,17 @@ const renderView = (res: Response, status?: number, messages?: string[]) => {
 };
 
 const getHandler = async (req: Request, res: Response, next: NextFunction) => {
-  const session: any = req.session;
-
   req.isAuthenticated()
     ? res.redirect(RouterUris.BASE + RouterUris.INDEX)
-    : renderView(res, 200, session?.messages);
+    : showMsgAndDestroySession(req, res);
+};
+
+const showMsgAndDestroySession = (req: Request, res: Response) => {
+  const session: any = req.session;
+  const msg = session?.messages;
+  req.logout((err) => console.log(err));
+
+  renderView(res, 401, msg);
 };
 
 const validateReqBody = async (
