@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= topic?.name %></title>
+  </head>
+
+  <body>
+    <% const messages= topic?.messages %> <% if(messages && messages.length>0)
+    {%> <% for (let i = 0; i < messages.length; i++) {%>
+    <div class="message-content">
+      <%= messages[i].content %> <% if(authenticated && hasPermission ) {%>
+      <p><%=messages[i].author.name %></p>
+      <p><%=messages[i].createdAt %></p>
+      <% } %> <% } %><%} else {%>
+      <p>No messages yet !</p>
+      <% } %>
+    </div>
+    <% if(authenticated) {%>
+    <div class="btn-bar">
+      <a class="btn" href="<%= createMsgUri %>"></a>
+    </div>
+    <% } %>
+  </body>
+</html>

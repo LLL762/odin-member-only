@@ -1,0 +1,13 @@
+<nav>
+  <div class="btn-bar">
+    <a href="<%= navView.homeUri %>" class="btn">home</a>
+    <a href="<%= navView.topicsUri %>" class="btn">topics</a>
+
+    <% if(authenticated){ %>
+    <a href="<%= navView.logoutUri %>" class="btn">logout</a>
+    <% } %> <% else{ %>
+    <a href="<%= navView.loginUri %>" class="btn">login</a>
+    <a href="<%= navView.signUpUri %>" class="btn">sign up</a>
+    <% } %>
+  </div>
+</nav>

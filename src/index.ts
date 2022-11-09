@@ -10,12 +10,14 @@ import http from "http";
 import { MongoDbDatasource } from "./datasource/MongoDbDatasource";
 import { Topic } from "./model/Topic";
 import { AppUser } from "./model/AppUser";
-import { AppRole, appRoleProperties } from "./model/AppRole";
 import { Message } from "./model/Message";
 import { initRouter } from "./init/RouterInit";
 import { handleError } from "./error/handler/GlobalErrorHandler";
 import PassportInit from "./init/PassportInit";
 import AuthFilter from "./auth/AuthFilter";
+import { AppRole } from "./model/AppRole";
+import TopicsAllController from "./controller/TopicsAllController";
+import TopicController from "./controller/TopicController";
 
 const app = express();
 const router = express.Router();
@@ -65,6 +67,9 @@ router.get("*", (req, res) => res.status(404).render("404"));
 app.use(router);
 
 app.use(handleError);
+
+console.log(AuthFilter.regexify(TopicsAllController.URI));
+console.log(AuthFilter.regexify(TopicController.URI));
 
 const server = http.createServer(app);
 server.listen(process.env.SERVER_PORT ?? 3000, () => console.log("run!"));
