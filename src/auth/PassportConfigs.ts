@@ -7,7 +7,6 @@ import AppUserRepo from "../repo/AppUserRepo";
 const STRATEGY = new Strategy(async (username, password, done) => {
   try {
     const user = await AppUserService.findByUsernameOrEmail(username);
-    console.log(user);
 
     const arePasswordsMatching = await bcrypt.compare(password, user.password);
     return arePasswordsMatching

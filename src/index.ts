@@ -16,8 +16,6 @@ import { handleError } from "./error/handler/GlobalErrorHandler";
 import PassportInit from "./init/PassportInit";
 import AuthFilter from "./auth/AuthFilter";
 import { AppRole } from "./model/AppRole";
-import TopicsAllController from "./controller/TopicsAllController";
-import TopicController from "./controller/TopicController";
 
 const app = express();
 const router = express.Router();
@@ -58,8 +56,8 @@ const dataSource = new MongoDbDatasource();
 dataSource.connect();
 
 app.all("*", AuthFilter.filter);
-
 PassportInit.init();
+
 initRouter(router);
 
 router.get("*", (req, res) => res.status(404).render("404"));
@@ -67,9 +65,6 @@ router.get("*", (req, res) => res.status(404).render("404"));
 app.use(router);
 
 app.use(handleError);
-
-console.log(AuthFilter.regexify(TopicsAllController.URI));
-console.log(AuthFilter.regexify(TopicController.URI));
 
 const server = http.createServer(app);
 server.listen(process.env.SERVER_PORT ?? 3000, () => console.log("run!"));

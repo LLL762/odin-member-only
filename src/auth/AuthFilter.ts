@@ -30,14 +30,13 @@ const whiteList = [
     methods: ["GET"],
   },
 ];
-
 const isRouteWhiteListed = (req: Request) => {
   for (let route of whiteList) {
     if (req.url.match(route.url)) {
       return route.methods.includes(req.method);
     }
-    return false;
   }
+  return false;
 };
 
 const matchOne = (url: string, regexs: string[]): boolean => {
@@ -50,7 +49,7 @@ const matchOne = (url: string, regexs: string[]): boolean => {
 };
 
 const filter = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.user && !isRouteWhiteListed(req)) {
+  if (!req.isAuthenticated() && !isRouteWhiteListed(req)) {
     res.redirect(RouterUris.BASE + RouterUris.LOG_IN);
   } else {
     next();
