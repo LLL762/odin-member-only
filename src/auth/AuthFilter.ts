@@ -1,16 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { RouterUris } from "../configs/RouterUri";
+import AddMsgController from "../controller/AddMsgController";
 import TopicController from "../controller/TopicController";
 import TopicsAllController from "../controller/TopicsAllController";
 
 const regexify = (url: string) => "^" + url.replace(/\:\w+/, "\\w+") + "$";
-
-const routeWhiteList: string[] = [
-  regexify(RouterUris.BASE + RouterUris.LOG_IN),
-  regexify(RouterUris.BASE + RouterUris.SIGN_UP),
-  regexify(TopicsAllController.URI),
-  regexify(TopicController.URI),
-];
 
 const whiteList = [
   {
@@ -29,20 +23,15 @@ const whiteList = [
     url: regexify(TopicController.URI),
     methods: ["GET"],
   },
+  {
+    url: regexify(AddMsgController.URI),
+    methods: ["GET", "POST"],
+  },
 ];
 const isRouteWhiteListed = (req: Request) => {
   for (let route of whiteList) {
     if (req.url.match(route.url)) {
       return route.methods.includes(req.method);
-    }
-  }
-  return false;
-};
-
-const matchOne = (url: string, regexs: string[]): boolean => {
-  for (let regex of regexs) {
-    if (url.match(regex)) {
-      return true;
     }
   }
   return false;
@@ -56,4 +45,4 @@ const filter = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default { filter, regexify };
+export default { filter };

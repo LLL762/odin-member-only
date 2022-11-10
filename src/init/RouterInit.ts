@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { RouterUris } from "../configs/RouterUri";
+import AddMsgController from "../controller/AddMsgController";
 import AppUserController from "../controller/AppUserController";
 import LogInController from "../controller/LogInController";
 import SignUpController from "../controller/SignUpController";
@@ -35,6 +36,7 @@ export const initRouter = (router: Router) => {
   );
 
   router.get(TopicsAllController.URI, TopicsAllController.getHandler);
-
   router.get(TopicController.URI, TopicController.getHandler);
+  router.get(AddMsgController.URI, AddMsgController.getHandler);
+  router.post(AddMsgController.URI, AddMsgController.postHandler);
 };

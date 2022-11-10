@@ -4,3 +4,5 @@ import { Doc } from "../types-alias/MongooseTypes";
 const createMsg = async (msg: Doc<IMesssage>) => {
   return msg.save();
 };
+
+export default { createMsg };

@@ -55,7 +55,7 @@ const message = new Message();
 const dataSource = new MongoDbDatasource();
 dataSource.connect();
 
-app.all("*", AuthFilter.filter);
+//app.all("*", AuthFilter.filter);
 PassportInit.init();
 
 initRouter(router);

@@ -21,4 +21,8 @@ export class MongoDbDatasource implements Datasource {
       throw new Error("Datasource url not specified");
     }
   }
+
+  public async startSession() {
+    const session = await mongoose.connection.startSession();
+  }
 }

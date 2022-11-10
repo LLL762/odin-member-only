@@ -7,4 +7,6 @@ export enum RouterUris {
   LOG_OUT = "/logout",
   SIGN_UP = "/sign-up",
   TOPICS = "/topics",
+  POST_MESSAGE = "/post",
+  MESSAGES = "messages",
 }

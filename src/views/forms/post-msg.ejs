@@ -1,9 +1,30 @@
 <form action="<%= postUri %>" method="post">
-  <label for="username">username</label>
+  <label for="title">Title</label>
+  <input
+    type="text"
+    name="title"
+    value="<%= message?.title %>"
+    required
+    maxlength="<%= messageProperties?.defaultMaxLength %>"
+    minlength="<%= messageProperties?.defaultMinLength %>"
+  />
+  <label for="content">Enter your message</label>
+  <textarea
+    name="content"
+    required
+    maxlength="<%= messageProperties?.contentMaxLength %>"
+    minlength="<%= messageProperties?.contentMinLength %>"
+  >
+ <%=message?.content%>  
+  </textarea>
+  <div class="form-btn-bar">
+    <button type="submit">submit</button>
+    <button type="reset">reset</button>
+  </div>
 </form>
 
 <ul class="form-err-msg">
-  <% for (var i = 0; i < messages?.length; i++) {%>
-  <li><%= messages[i] %></li>
+  <% for (var i = 0; i < errs?.length; i++) {%>
+  <li><%= errs[i] %></li>
   <% } %>
 </ul>
